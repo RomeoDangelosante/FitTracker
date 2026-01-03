@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}I tuoi allenamenti{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  {% if workouts %}
+    <table>
+        <tr>
+            <th>Data</th>
+            <th>Note</th>
+            <th>Volume Totale (kg)</th> <!-- Statistica Pro -->
+            <th>Azione</th>
+        </tr>
+        {% for w in workouts %}
+        <tr>
+            <td>{{ w['date'] }}</td>
+            <td>{{ w['notes'] }}</td>
+            <td><strong>{{ w['total_volume'] }} kg</strong></td>
+            <td><a href="{{ url_for('main.details', id=w['id']) }}">Dettagli</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+  {% else %}
+    <p>Nessun allenamento registrato. Inizia ora!</p>
+  {% endif %}
+{% endblock %}

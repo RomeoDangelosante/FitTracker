@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>Dettaglio Allenamento: {{ workout['date'] }}</h1>
+{% endblock %}
+
+{% block content %}
+  <p>Note: {{ workout['notes'] }}</p>
+
+  <h3>Esercizi svolti</h3>
+  <ul>
+      {% for s in sets %}
+        <li>
+            <strong>{{ s['exercise_name'] }}</strong> ({{ s['muscle_group'] }}): 
+            {{ s['reps'] }} reps x {{ s['weight'] }} kg
+        </li>
+      {% endfor %}
+  </ul>
+
+  <hr>
+  <h3>Aggiungi Serie</h3>
+  <form method="post">
+      <label>Esercizio:</label>
+      <select name="exercise_id">
+          {% for ex in exercises %}
+            <option value="{{ ex['id'] }}">{{ ex['name'] }}</option>
+          {% endfor %}
+      </select>
+      <label>Ripetizioni:</label>
+      <input type="number" name="reps" required>
+      <label>Peso (kg):</label>
+      <input type="number" name="weight" step="0.5" required>
+      <button type="submit">Aggiungi</button>
+  </form>
+{% endblock %}

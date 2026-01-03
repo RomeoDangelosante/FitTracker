@@ -1,0 +1,26 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - FitTracker</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>FitTracker</h1>
+  <ul>
+    {% if g.user %}
+      <li><span>Ciao, {{ g.user['username'] }}</span></li>
+      <li><a href="{{ url_for('main.dashboard') }}">Diario</a></li>
+      <li><a href="{{ url_for('main.create') }}">Nuovo Allenamento</a></li>
+      <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+    {% else %}
+      <li><a href="{{ url_for('auth.register') }}">Registrati</a></li>
+      <li><a href="{{ url_for('auth.login') }}">Accedi</a></li>
+    {% endif %}
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>
