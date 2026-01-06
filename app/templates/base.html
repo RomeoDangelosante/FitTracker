@@ -2,7 +2,7 @@
 <title>{% block title %}{% endblock %} - FitTracker</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-  <h1>FitTracker</h1>
+  <img width="200" height="200" src="{{ url_for('static', filename='logo.png') }}" alt="FitTracker Logo" class="logo">
   <ul>
     {% if g.user %}
       <li><span>Ciao, {{ g.user['username'] }}</span></li>
